@@ -4,11 +4,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    // This code has been written primarly for iphone5s. It can be run on other versions of iphone however the screen will not look like a custom fit. There are ways of making it compatible for all other iphone sizes however that is more a bit more advance and the meeting was focused on getting the basics down with Xcode.
+    // This code has been written primarly for iphone5s. 
+    //It can be run on other versions of iphone however the screen will not look like a custom fit.
+    //There are ways of making it compatible for all other iphone sizes however that is more a bit 
+    //more advance and the meeting was focused on getting the basics down with Xcode.
     
     var numberOnScreen:Double = 0; // This is the current number on display in the calculator.
     
-    var previousNumber:Double = 0; // This number is to hold the value of the first number that was clicked aka after you click the first number you then click the second but you need to hold onto the first number that was clicked which is this variable.
+    var previousNumber:Double = 0; // This number is to hold the value of the first number that was 
+    //clicked aka after you click the first number you then click the second but you need to hold 
+    //onto the first number that was clicked which is this variable.
     
     var performingMath = false // This is variable that says true if we clicked on a "+","-","x" or "/"
     
@@ -22,21 +27,30 @@ class ViewController: UIViewController {
         if performingMath == true{ // If we clicked on a "+","-","/" or "*"
     
             
-    // label.text access the text in the label and String(sender.tag-1) retrives the id of the number that was pressed and minueses it by one. 0 has an id of one and 1 has an id of 2 and so on. We are simply retrieveing what number was pressed and casting it to a String with the String() function.
+    // label.text access the text in the label and String(sender.tag-1) retrives the id of the 
+    //number that was pressed and minueses it by one. 0 has an id of one and 1 has an id of 2 
+    //and so on. We are simply retrieveing what number was pressed and casting it to a String with the String() function.
             label.text = String(sender.tag-1);
             
-    //numberOnScreen is retrieveing the number in the text are aka the black part of the calculator and converting it to a Double wit the Double().
+    //numberOnScreen is retrieveing the number in the text are aka the black part of 
+    //the calculator and converting it to a Double wit the Double().
             numberOnScreen = Double(label.text!)!;
             
-    //This simply asks did we click on a "+","-","x" or "/" and the answer is no because this is only when a number is clicked and by default performingMath is set to false until one of those buttons is pressed.
+    //This simply asks did we click on a "+","-","x" or "/" and the answer is no because 
+    //this is only when a number is clicked and by default performingMath is set to false 
+    //until one of those buttons is pressed.
            performingMath = false
             
         }else{
             
-    // This is when we did not press a math symbol. So in other words the first number pressed into the calculator. Again the text in the label is set to equal the tag-1 of which ever number was pressed. It's converted into a string cause text is a String and can't except just numbers.
+    // This is when we did not press a math symbol. So in other words the first 
+    //number pressed into the calculator. Again the text in the label is set to equal 
+    //the tag-1 of which ever number was pressed. It's converted into a string 
+    //cause text is a String and can't except just numbers.
             label.text = label.text! + String(sender.tag - 1);
             
-    //This converts the the label.text that we set in the line before back into a number. Specifically a Double in the numberOnScreen variable so that we can minpulate it later on. 
+    //This converts the the label.text that we set in the line before back into a number. 
+    //Specifically a Double in the numberOnScreen variable so that we can minpulate it later on. 
        numberOnScreen = Double(label.text!)!
             
             
@@ -47,11 +61,14 @@ class ViewController: UIViewController {
     
     @IBAction func buttons(_ sender: UIButton)
     {
-       //This checks that the "+","-","x" or "/" are pressed and that you don't have nothning in the text label aka "". You are not pressing the "=" button and you are not pressing the "c" button. Only the "+","-","x" or "/"
+       //This checks that the "+","-","x" or "/" are pressed and that you don't have 
+       //nothning in the text label aka "". You are not pressing the "=" button and
+       //you are not pressing the "c" button. Only the "+","-","x" or "/"
         if label.text != "" && sender.tag != 11 && sender.tag != 16{
             
             
-            //This sets previousNumber equal to the number inside the label.text. Holds onto the number so we don't lose it.
+            //This sets previousNumber equal to the number inside the label.text.
+            //Holds onto the number so we don't lose it.
             previousNumber = Double(label.text!)!
             
             if sender.tag == 12{ // 12 is the tag for Divide were checking if were dividing.
@@ -75,10 +92,12 @@ class ViewController: UIViewController {
                 label.text = "+";
                 
             }
-            // operation is set to the tag we pressed meaning it is keeping track of which mathematical operation we are going to be doing.
+            // operation is set to the tag we pressed meaning it is keeping track of 
+            //which mathematical operation we are going to be doing.
             operation = sender.tag
             
-            // Since we are doing a mathematical operation we are "performingMath" therefore we are setting that equal to true.
+            // Since we are doing a mathematical operation we are "performingMath" therefore we 
+            //are setting that equal to true.
             performingMath = true;
             
         // This checks to see if we pressed the "=" button
@@ -86,22 +105,30 @@ class ViewController: UIViewController {
             
             if operation == 12{ // checking if our operation is going to be division.
                 
-                // Sets the screen to the number where the previousNumber aka the first number and the second number aka the number that is on screen to the number where previousNumber is divided by the numberOnScreen. aka the result.
+                // Sets the screen to the number where the previousNumber aka the first number 
+                //and the second number aka the number that is on screen to the number where 
+                //previousNumber is divided by the numberOnScreen. aka the result.
                 label.text = String(previousNumber / numberOnScreen);
                 
             }else if operation == 13{// checking if our operation is going to be multiplication.
                 
-                // Sets the screen to the number where the previousNumber aka the first number and the second number aka the number that is on screen to the number where previousNumber is multiplied by the numberOnScreen. aka the result.
+                // Sets the screen to the number where the previousNumber aka the first number and 
+                //the second number aka the number that is on screen to the number where previousNumber is
+                //multiplied by the numberOnScreen. aka the result.
                 label.text = String(previousNumber * numberOnScreen);
                 
             }else if operation == 14{// checking if our operation is going to be subtraction.
                 
-                // Sets the screen to the number where the previousNumber aka the first number and the second number aka the number that is on screen to the number where previousNumber is subtracted by the numberOnScreen. aka the result.
+                // Sets the screen to the number where the previousNumber aka the first number and the 
+                //second number aka the number that is on screen to the number where previousNumber is 
+                //subtracted by the numberOnScreen. aka the result.
                 label.text = String(previousNumber - numberOnScreen);
                 
             }else if operation == 15{// checking if our operation is going to be addition.
                 
-                // Sets the screen to the number where the previousNumber aka the first number and the second number aka the number that is on screen to the number where previousNumber is added by the numberOnScreen. aka the result.
+                // Sets the screen to the number where the previousNumber aka the first number and the
+                //second number aka the number that is on screen to the number where previousNumber is
+                //added by the numberOnScreen. aka the result.
                 label.text = String(previousNumber + numberOnScreen);
                 
             }
@@ -124,7 +151,8 @@ class ViewController: UIViewController {
         }
     }
     
-    // These functions "viewDidLoad" and "didRecieveMemoryWarning" come by default for any project incase any exceptions arise while compiling and running the app.
+    // These functions "viewDidLoad" and "didRecieveMemoryWarning" come by default for any project 
+    //incase any exceptions arise while compiling and running the app.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
